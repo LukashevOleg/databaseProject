@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% endblock %}
+
+{% block output_window %}
+    <div class="dialog_window">
+
+        <div class="output" >
+            <div class="input_panel">
+                <form method="post">
+                    <input class="input" type="text" name="id" placeholder="Напишите ID">
+                    <button type="submit" class="button_getEntity"></button>
+                </form>
+            </div>
+
+            {% block divContainer %}
+             <div class="div_container" id="div_container">
+                {% for en in arrEntity %}
+                    <div class="message_div">
+                        {{en}}
+                    </div>
+                {% endfor %}
+
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

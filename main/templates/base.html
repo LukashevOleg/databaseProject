@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    <div class="title">
+    {% block title %}
+    {% if title %}
+        <title>{{title}}</title>
+    {% else %}
+        <title> Главная страница </title>
+    {% endif %}
+    {% endblock %}
+    </div>
+
+    <script>
+       document.querySelectorAll(".content a").forEach((el) => {
+       console.log('q');
+    if (window.location.pathname.indexOf(el.getAttribute("href")) > -1) {
+        console.log('l');
+        el.classList.add("active");
+    }
+});
+    </script>
+</head>
+<body>
+    {% block content %}
+    <div class="content">
+        {% block mainmenu %}
+        <ul class="mainmenu">
+            {% for m in menu %}
+            <li><a href="{{m.url}}" class="a_mainmenu">{{m.name}}</a></li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+    {% block output_window %}
+    <div class="dialog_window">
+
+        <div class="output" >
+            <div class="input_panel">
+                <form method="post">
+                    <input class="input" type="text" name="id" placeholder="Напишите ID">
+                    <button type="submit" class="button_getEntity"></button>
+                </form>
+            </div>
+
+            {% block divContainer %}
+             <div class="div_container" id="div_container">
+                {% for en in arrEntity %}
+                    <div class="message_div">
+                        {{en}}
+                        <form method="post">
+                            <button type="submit" value='{{en[0]}}' name="add_in_basket"> добавить в корзину</button>
+                        </form>
+                    </div>
+                {% endfor %}
+
+            </div>
+            {% endblock %}
+
+
+
+        </div>
+<!--        <div class="table_info_about_bot"> Бот </div>-->
+    </div>
+    {% endblock %}
+</body>
+</html>
